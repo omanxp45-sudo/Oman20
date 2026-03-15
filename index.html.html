@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)file:///C:/Users/Dell/Downloads/salim-albadi_3.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salim Albadi</title>
+  <link href="./Salim Albadi_files/css2" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f3ee;
+      --ink: #1a1814;
+      --muted: #8a8680;
+      --accent: #2d2a26;
+      --line: #d8d5cf;
+      --grad: linear-gradient(90deg, #e8643a, #d94f8a, #7b5ea7, #3a8fd9, #3abfd9);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+      cursor: none;
+    }
+
+    /* ── Banners ── */
+    .static-banner {
+      width: 100%;
+      background: var(--grad);
+      background-size: 300% 100%;
+      animation: gradientShift 6s ease infinite;
+      padding: 13px 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .static-banner-text {
+      color: #fff;
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+    }
+    .static-banner-text em { font-style: italic; opacity: 0.85; }
+
+    .marquee-banner {
+      width: 100%;
+      background: var(--ink);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 9px 0;
+    }
+    .marquee-track {
+      display: inline-block;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-track span {
+      display: inline-block;
+      color: var(--bg);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 28px;
+    }
+    .marquee-dot { opacity: 0.35; padding: 0 6px !important; }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── Order Form (full-width, right under banners) ── */
+    .order-hero {
+      width: 100%;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      padding: 48px 0 56px;
+    }
+    .order-hero .container { }
+    .order-hero-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(26px, 4vw, 36px);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .order-hero-sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 40px;
+    }
+
+    /* Form elements */
+    .order-form { display: flex; flex-direction: column; gap: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid var(--line);
+      padding: 10px 0;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-input::placeholder { color: var(--muted); }
+    .form-input:focus { border-color: var(--ink); }
+    .form-select-wrap { position: relative; }
+    .form-select { cursor: pointer; padding-right: 24px; }
+    .select-arrow {
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted); font-size: 12px;
+      pointer-events: none;
+    }
+    .form-textarea { resize: none; height: 88px; padding-top: 10px; line-height: 1.7; }
+
+    /* Budget radio buttons — gradient selected state */
+    .budget-options { display: flex; gap: 0; flex-wrap: wrap; }
+    .budget-opt { display: flex; align-items: center; cursor: pointer; flex: 1; }
+    .budget-opt input[type="radio"] { display: none; }
+    .budget-opt span {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 10px 8px;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      border: 1.5px solid var(--line);
+      margin-right: -1px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      color: var(--muted);
+    }
+    .budget-opt input:checked + span {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+      z-index: 1;
+      position: relative;
+    }
+    .budget-opt:hover span { border-color: var(--ink); color: var(--ink); }
+
+    /* Two-tone submit buttons */
+    .form-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+
+    .btn-primary {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--ink);
+      color: var(--bg);
+      border: none;
+      padding: 15px 32px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { opacity: 0.75; }
+
+    .btn-whatsapp {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--grad);
+      background-size: 200% 100%;
+      animation: gradientShift 5s ease infinite;
+      color: #fff;
+      border: none;
+      padding: 15px 32px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: none;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+    .btn-whatsapp:hover { opacity: 0.85; }
+
+    .btn-arrow { transition: transform 0.2s; }
+    .btn-primary:hover .btn-arrow,
+    .btn-whatsapp:hover .btn-arrow { transform: translateX(4px); }
+
+    .form-success {
+      display: none;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    /* ── Cursor ── */
+    .cursor {
+      position: fixed;
+      width: 8px; height: 8px;
+      background: var(--ink);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+    }
+    .cursor.expand {
+      width: 32px; height: 32px;
+      background: transparent;
+      border: 1px solid var(--ink);
+    }
+
+    /* ── Layout ── */
+    .container { max-width: 680px; margin: 0 auto; padding: 0 32px; }
+
+    nav {
+      padding: 40px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.1s forwards;
+    }
+    .nav-name { font-family: 'Fraunces', serif; font-weight: 300; font-size: 15px; letter-spacing: 0.01em; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+
+    .hero { padding: 120px 0 80px; }
+    .hero-tag { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s ease 0.25s forwards; }
+    .hero-title { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(44px, 8vw, 72px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 32px; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
+    .hero-title em { font-style: italic; color: var(--muted); }
+    .hero-desc { max-width: 420px; color: var(--muted); line-height: 1.8; opacity: 0; animation: fadeUp 0.8s ease 0.55s forwards; }
+
+    hr { border: none; border-top: 1px solid var(--line); margin: 0; }
+
+    section { padding: 72px 0; opacity: 0; animation: fadeUp 0.8s ease forwards; }
+    section:nth-of-type(1) { animation-delay: 0.65s; }
+    section:nth-of-type(2) { animation-delay: 0.75s; }
+    section:nth-of-type(3) { animation-delay: 0.85s; }
+
+    .section-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 40px; }
+
+    .work-list { display: flex; flex-direction: column; }
+    .work-item { display: grid; grid-template-columns: 1fr auto; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; transition: opacity 0.2s; position: relative; overflow: hidden; }
+    .work-item:first-child { border-top: 1px solid var(--line); }
+    .work-item::after { content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--ink); transition: width 0.35s ease; }
+    .work-item:hover::after { width: 100%; }
+    .work-item:hover .work-arrow { transform: translate(3px, -3px); }
+    .work-title { font-family: 'Fraunces', serif; font-weight: 300; font-size: 22px; letter-spacing: -0.01em; }
+    .work-meta { display: flex; align-items: center; gap: 20px; }
+    .work-tag { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .work-year { font-size: 12px; color: var(--muted); }
+    .work-arrow { font-size: 14px; transition: transform 0.25s ease; margin-left: 12px; }
+    .work-sub { grid-column: 1; font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    .about-text { font-family: 'Fraunces', serif; font-weight: 300; font-size: 20px; line-height: 1.65; letter-spacing: -0.01em; color: var(--accent); max-width: 540px; }
+    .about-text span { color: var(--muted); font-style: italic; }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; margin-top: 8px; }
+    .skill-item { padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+    .skill-item:nth-child(-n+2) { border-top: 1px solid var(--line); }
+
+    .contact-links { display: flex; flex-direction: column; gap: 0; }
+    .contact-link { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink); font-size: 13px; transition: opacity 0.2s; }
+    .contact-link:first-child { border-top: 1px solid var(--line); }
+    .contact-link:hover { opacity: 0.5; }
+    .contact-link-arrow { color: var(--muted); transition: transform 0.2s; }
+    .contact-link:hover .contact-link-arrow { transform: translate(3px, -3px); }
+
+    footer { padding: 40px 0 60px; display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; letter-spacing: 0.06em; opacity: 0; animation: fadeUp 0.8s ease 1s forwards; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+      .budget-options { flex-wrap: wrap; }
+      .budget-opt { flex: 1 1 48%; }
+      .form-actions { flex-direction: column; }
+      .btn-primary, .btn-whatsapp { justify-content: center; }
+      .work-item { grid-template-columns: 1fr; }
+      .work-meta { margin-top: 4px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skills-grid .skill-item:nth-child(2) { border-top: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cursor" style="left: 812px; top: 5px;"></div>
+
+<!-- Static Banner -->
+<div class="static-banner">
+  <p class="static-banner-text">Salim Albadi &nbsp;·&nbsp; <em>Software Maker</em></p>
+</div>
+
+<!-- Scrolling Marquee Banner -->
+<div class="marquee-banner">
+  <div class="marquee-track">
+    <span>Salim Albadi</span><span class="marquee-dot">✦</span>
+    <span>Software Maker</span><span class="marquee-dot">✦</span>
+    <span>Available for new projects</span><span class="marquee-dot">✦</span>
+    <span>Based in Muscat, Oman</span><span class="marquee-dot">✦</span>
+    <span>Salim Albadi</span><span class="marquee-dot">✦</span>
+    <span>Software Maker</span><span class="marquee-dot">✦</span>
+    <span>Available for new projects</span><span class="marquee-dot">✦</span>
+    <span>Based in Muscat, Oman</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ── Order Form — right under the banners ── -->
+<div class="order-hero">
+  <div class="container">
+    <p class="order-hero-title">Order Software</p>
+    <p class="order-hero-sub">Tell me what you need — I'll turn it into something real.</p>
+
+    <div class="order-form" id="orderForm">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input class="form-input" id="f-name" type="text" placeholder="Ahmed Al-Rashid">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" id="f-email" type="email" placeholder="you@example.com">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Type of Software</label>
+        <div class="form-select-wrap">
+          <select class="form-input form-select" id="f-type">
+            <option value="" disabled="" selected="">Select a category</option>
+            <option>Web Application</option>
+            <option>Mobile App</option>
+            <option>Desktop Application</option>
+            <option>Dashboard / Analytics</option>
+            <option>API / Backend System</option>
+            <option>E-commerce Platform</option>
+            <option>Custom Tool / Other</option>
+          </select>
+          <span class="select-arrow">↓</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Budget Range</label>
+        <div class="budget-options">
+          <label class="budget-opt"><input type="radio" name="budget" value="$1k–$5k"><span>$1k – $5k</span></label>
+          <label class="budget-opt"><input type="radio" name="budget" value="$5k–$20k"><span>$5k – $20k</span></label>
+          <label class="budget-opt"><input type="radio" name="budget" value="$20k–$50k"><span>$20k – $50k</span></label>
+          <label class="budget-opt"><input type="radio" name="budget" value="$50k+"><span>$50k+</span></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Project Description</label>
+        <textarea class="form-input form-textarea" id="f-desc" placeholder="Describe what you want to build. What problem does it solve? Who will use it?"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Timeline</label>
+        <input class="form-input" id="f-timeline" type="text" placeholder="e.g. 3 months, ASAP, flexible…">
+      </div>
+
+      <div class="form-actions">
+        <!-- Dark button: copy to clipboard / confirm -->
+        <button class="btn-primary" onclick="sendOrder(this)">
+          <span>Send Order</span>
+          <span class="btn-arrow">→</span>
+        </button>
+        <!-- Gradient button: opens WhatsApp -->
+        <a class="btn-whatsapp" id="waBtn" href="file:///C:/Users/Dell/Downloads/salim-albadi_3.html#" target="_blank" onclick="return openWhatsApp()">
+          <span>Send via WhatsApp</span>
+          <span class="btn-arrow">↗</span>
+        </a>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        ✦ &nbsp; Order sent! Opening WhatsApp — Salim will be in touch within 48 hours.
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Rest of site -->
+<div class="container">
+
+  <nav>
+    <span class="nav-name">Salim Albadi</span>
+    <div class="nav-links">
+      <a href="file:///C:/Users/Dell/Downloads/salim-albadi_3.html#work">Work</a>
+      <a href="file:///C:/Users/Dell/Downloads/salim-albadi_3.html#about">About</a>
+      <a href="file:///C:/Users/Dell/Downloads/salim-albadi_3.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-tag">Software Maker — Muscat, Oman</p>
+    <h1 class="hero-title">Building software<br><em>that matters.</em></h1>
+    <p class="hero-desc">I design and build software products — from idea to interface to infrastructure. Precise, thoughtful, and built to last.</p>
+  </div>
+
+  <hr>
+
+  <section id="work">
+    <p class="section-label">Selected Work</p>
+    <div class="work-list">
+      <a href="file:///C:/Users/Dell/Downloads/salim-albadi_3.html#" class="work-item">
+        <span class="work-title">Forma</span>
+        <div class="work-meta"><span class="work-tag">Web App</span><span class="work-year">2024</span><span class="work-arrow">↗</span></div>
+        <span class="work-sub">Collaborative workspace for distributed teams</span>
+      </a>
+      <a href="file:///C:/Users/Dell/Downloads/salim-albadi_3.html#" class="work-item">
+        <span class="work-title">Pulse Dashboard</span>
+        <div class="work-meta"><span class="work-tag">Product</span><span class="work-year">2023</span><span class="work-arrow">↗</span></div>
+        <span class="work-sub">Real-time analytics for e-commerce operators</span>
+      </a>
+      <a href="file:///C:/Users/Dell/Downloads/salim-albadi_3.html#" class="work-item">
+        <span class="work-title">Narrate</span>
+        <div class="work-meta"><span class="work-tag">Mobile</span><span class="work-year">2023</span><span class="work-arrow">↗</span></div>
+        <span class="work-sub">Storytelling app with 40k+ active users</span>
+      </a>
+      <a href="file:///C:/Users/Dell/Downloads/salim-albadi_3.html#" class="work-item">
+        <span class="work-title">OpenShelf</span>
+        <div class="work-meta"><span class="work-tag">Open Source</span><span class="work-year">2022</span><span class="work-arrow">↗</span></div>
+        <span class="work-sub">Library management system used by 200+ institutions</span>
+      </a>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="about">
+    <p class="section-label">About</p>
+    <p class="about-text">I'm a software maker who cares deeply about craft. I work across the full stack — <span>from backend architecture</span> to the last pixel of the interface. I believe great software is invisible: it just works, beautifully.</p>
+    <div class="skills-grid" style="margin-top: 48px;">
+      <div class="skill-item">TypeScript / JavaScript</div>
+      <div class="skill-item">React / Next.js</div>
+      <div class="skill-item">Node.js / Python</div>
+      <div class="skill-item">PostgreSQL / Redis</div>
+      <div class="skill-item">Cloud Infrastructure</div>
+      <div class="skill-item">Product Design</div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section id="contact">
+    <p class="section-label">Get in touch</p>
+    <div class="contact-links">
+      <a href="mailto:salim@example.com" class="contact-link">salim@example.com<span class="contact-link-arrow">↗</span></a>
+      <a href="https://github.com/" target="_blank" class="contact-link">GitHub<span class="contact-link-arrow">↗</span></a>
+      <a href="https://linkedin.com/" target="_blank" class="contact-link">LinkedIn<span class="contact-link-arrow">↗</span></a>
+      <a href="https://twitter.com/" target="_blank" class="contact-link">Twitter / X<span class="contact-link-arrow">↗</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Salim Albadi</span>
+    <span>Software Maker</span>
+  </footer>
+
+</div>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+  });
+
+  // Build WhatsApp message from form fields
+  function buildMessage() {
+    const name     = document.getElementById('f-name').value.trim() || '(not provided)';
+    const email    = document.getElementById('f-email').value.trim() || '(not provided)';
+    const type     = document.getElementById('f-type').value || '(not selected)';
+    const budget   = (document.querySelector('input[name="budget"]:checked') || {}).value || '(not selected)';
+    const desc     = document.getElementById('f-desc').value.trim() || '(not provided)';
+    const timeline = document.getElementById('f-timeline').value.trim() || '(not provided)';
+    return `New Software Order via salimalbadi.com\n\nName: ${name}\nEmail: ${email}\nType: ${type}\nBudget: ${budget}\nTimeline: ${timeline}\n\nDescription:\n${desc}`;
+  }
+
+  function openWhatsApp() {
+    const msg = buildMessage();
+    const url = 'https://wa.me/96894055999?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    showSuccess();
+    return false;
+  }
+
+  function sendOrder(btn) {
+    const msg = buildMessage();
+    const url = 'https://wa.me/96894055999?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+    showSuccess();
+    btn.disabled = true;
+    btn.style.opacity = '0.4';
+  }
+
+  function showSuccess() {
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+
+
+</body></html>
