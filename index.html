@@ -8,9 +8,20 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
  
-<script > if(user){
+<script > 
 function openUpload(){
   const user = auth.currentUser;
+
+  if(user){
+    window.location.href = "post.html";
+  } else {
+    showLoginModal();
+  }
+}
+  function requireLogin(action){
+  const user = auth().currentUser;
+
+  if(user){
     window.location.href = "post.html";
   } else {
     showLoginModal();
